@@ -86,46 +86,12 @@
     if (!k) return false;
     if (n.indexOf(' ' + k + ' ') !== -1) return true;
     if (k.indexOf(' ') !== -1) return false;
-    if (k.length <= 2) return false;
+    if (k.length < 5) return false;
     for (var i = 0; i < words.length; i++) {
       var w = words[i];
-      if (w && (w.indexOf(k) === 0 || (w.length > 3 && k.indexOf(w) === 0))) return true;
+      if (w && w.length >= 5 && (w.indexOf(k) === 0 || k.indexOf(w) === 0)) return true;
     }
     return false;
-  }
-  var SYSTEM = "You are the friendly assistant embedded on Akhilesh Vankayala's personal portfolio website. Answer visitor questions helpfully and concisely (2-4 sentences, plain text, no markdown headings). " +
-    "FACTS — Name: Akhilesh Vankayala, Computer Science undergrad (B.Tech CSE, Anurag University, 2024-2028, CGPA 9.73/10; Intermediate 964/1000; Class X CGPA 10/10), MERN developer, daily DSA practice, growing interest in AI/ML, preparing for software engineering roles. Technical Member of the Salesforce Club (co-ordinated The Great Asia AI Summit 2026). Based in Hyderabad, India, open to remote. Phone: +91-8125671508. Email: akhileshvankayala158@gmail.com (replies in about an hour). GitHub: https://github.com/Akhileshvankayala — LinkedIn: https://www.linkedin.com/in/akhilesh-vankayala-5ba7b1343/ — Instagram: https://www.instagram.com/akhilesh._.158/. " +
-    "Skills: React, TypeScript, Tailwind, Bootstrap, Vite/Next.js, Node.js, Express, FastAPI, MongoDB, MySQL, SQLAlchemy, SQL basics, Socket.IO, Supabase, Docker, JWT, Cloudinary, C, C++, Java, HTML/CSS, Git. " +
-    "Projects (6): 1) HirBee Smart Placement Tracker — college TPO recruitment platform (auth, RBAC, eligibility screening, analytics, Excel reports). Live: https://smart-placement-tracker-indol.vercel.app/login — Code: https://github.com/Akhileshvankayala/smart-placement-tracker. " +
-    "2) Slack Clone — realtime chat (Socket.IO, JWT, Cloudinary media). Live: https://slack-clone-group-project-1.vercel.app/ — Code: https://github.com/Akhileshvankayala/slack-clone-group-project-1. " +
-    "3) Route Optimisation — biomedical waste collection for hospitals (Dijkstra + NetworkX), React + TypeScript frontend, FastAPI + SQLAlchemy + SQLite, Docker Compose. Code: https://github.com/Akhileshvankayala/garbageDisposal-Route_Optimisation_System. " +
-    "4) Accessible Campus Services — Supabase realtime + Gemini-powered chatbot, 100% accuracy over 10+ requests. Code: https://github.com/Akhileshvankayala/physically-challenged-campus-services. " +
-    "5) Result Extractor — Flask + Selenium portal scraping, Pandas processing, 98% accuracy over 100+ records, Next.js frontend. Code: https://github.com/Akhileshvankayala/Result_Extractor-working. " +
-    "6) Single Player Quiz — hand-rolled Stack/LinkedList engine, REST sessions. Code: https://github.com/Akhileshvankayala/quiz-for-IP. " +
-    "CFG 2026 — JPMC Code for Good in Hyderabad. Akhilesh's team chose Challenge 1 from The Barabari Collective: automate evaluation of UI/UX and product-design assignments while keeping human judgment in the loop. An AI coding agent derailed the codebase; with help from mentors Rashmi K. and Ravi Kant Dwivedi and the SMEs, the team simplified its approach and recovered. Akhilesh mainly worked on student and organization dashboards, plus model evaluation and integration. The team resolved merge conflicts, tested the app, and submitted with 10 seconds remaining. They did not win; his takeaways were understanding the problem, adapting, teamwork, responsible AI use, and staying calm. Mentors: Rashmi K., Khushi Aggarwal, Ravi Kant Dwivedi, Santhosh Munnoor. Teammates: Snehitha Reddy V. and Charitha Reddy Kalam. " +
-    "Certifications: NPTEL Programming in Java, Google Cloud Generative AI for Developers, Cisco Intro to Modern AI, Simplilearn Software Development, plus NPTEL DSA, IBM SkillsBuild, GDSC Vogue AI, Infosys Excel, Wadhwani programs. Hobbies: artwork, handmade gifts. " +
-    "RULES: prefer these facts for portfolio questions. Never invent personal details (age, phone, address, salary, family). For general questions (tech help, career advice) answer briefly and helpfully. If you truly don't know something about Akhilesh, say so and point to his email.";
-
-  var history = [];
-  function trimHist() { while (history.length > 8) history.splice(0, 2); }
-  function plain(html) { return String(html).replace(/<[^>]+>/g, ''); }
-  function escapeHtml(s) {
-    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  }
-  function linkify(s) {
-    var e = escapeHtml(s);
-    e = e.replace(/(https?:\/\/[^\s<)]+)/g, '<a href=\"$1\" target=\"_blank\" rel=\"noopener\">$1</a>');
-    e = e.replace(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g, '<a href=\"mailto:$1\">$1</a>');
-    return e.replace(/\n/g, '<br>');
-  }
-  function extractText(res) {
-    try {
-      var c = res && res.message && res.message.content;
-      if (typeof c === 'string') return c;
-      if (Array.isArray(c)) return c.map(function (b) { return (b && b.text) || ''; }).join('');
-      if (res && typeof res.text === 'string') return res.text;
-    } catch (e) {}
-    return '';
   }
   function match(q) {
     var n = norm(q), words = n.split(' '), best = null, bs = 0, i, j, s;
@@ -165,11 +131,13 @@
       setTimeout(function () {
         try { typing.outerHTML = ''; } catch (e) {}
         bubble(m.best.a, 'bot');
-        history.push({ role: 'user', content: q }, { role: 'assistant', content: plain(m.best.a) });
-        trimHist();
       }, wait);
     } else {
-      aiReply(q, typing);
+      var wait = Math.min(400 + q.length * 8, 1100);
+      setTimeout(function () {
+        try { typing.outerHTML = ''; } catch (e) {}
+        bubble(smartFallback(q), 'bot');
+      }, wait);
     }
   }
   var PERSONAL = ['age', 'old', 'birthday', 'born', 'salary', 'pay', 'married', 'girlfriend', 'boyfriend', 'family', 'parents', 'religion', 'caste', 'height'];
@@ -180,39 +148,7 @@
     }
     var letters = n.replace(/[^a-z]/g, '');
     if (letters.length < 3) return 'Could you say that another way? I can answer about his <b>skills</b>, <b>projects</b>, <b>education</b> and <b>contact</b>.';
-    return 'I am offline right now so my AI brain is unreachable — but ask me anything about Akhilesh (<b>projects</b>, <b>skills</b>, <b>contact</b>), or email him at ' + link('mailto:' + MAIL, MAIL) + ' — he replies fast.';
-  }
-  function aiReply(q, typing) {
-    history.push({ role: 'user', content: q });
-    trimHist();
-    function finish(html) {
-      try { typing.outerHTML = ''; } catch (e) {}
-      bubble(html, 'bot');
-    }
-    var hasAI = (typeof puter !== 'undefined') && puter && puter.ai && puter.ai.chat;
-    if (!hasAI) { finish(smartFallback(q)); return; }
-    var settled = false;
-    var timer = setTimeout(function () { settled = true; finish(smartFallback(q)); }, 30000);
-    try {
-      Promise.resolve(puter.ai.chat([{ role: 'system', content: SYSTEM }].concat(history))).then(function (res) {
-        if (settled) return;
-        clearTimeout(timer);
-        settled = true;
-        var txt = extractText(res).trim();
-        if (!txt) { finish(smartFallback(q)); return; }
-        history.push({ role: 'assistant', content: txt });
-        trimHist();
-        finish(linkify(txt));
-      }, function () {
-        if (settled) return;
-        clearTimeout(timer);
-        settled = true;
-        finish(smartFallback(q));
-      });
-    } catch (e) {
-      clearTimeout(timer);
-      finish(smartFallback(q));
-    }
+    return 'I can answer portfolio questions about <b>CFG 2026</b>, Akhilesh\'s <b>projects</b>, <b>skills</b>, <b>education</b> and <b>contact</b>. For anything else, email him at ' + link('mailto:' + MAIL, MAIL) + '.';
   }
   function ask(q) {
     q = String(q || '').trim();
