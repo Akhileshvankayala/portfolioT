@@ -27,7 +27,7 @@
     { k: ['education', 'college', 'university', 'degree', 'study', 'studying', 'btech', 'b tech', 'cgpa', 'school', 'anurag', 'marks', 'intermediate', '10th', '12th'],
       a: "B.Tech CSE at Anurag University (2024–2028, CGPA 9.73/10) · Intermediate 964/1000 (Sri Chaitanya) · Class X CGPA 10/10. Core strengths: DSA, full-stack MERN, and now system design." },
     { k: ['skill', 'tech stack', 'technologies', 'language', 'framework', 'what can you do', 'stack', 'tools', 'fundamental'],
-      a: "<b>Frontend:</b> React, TypeScript, Tailwind, Vite/Next.js · <b>Backend:</b> Node, Express, FastAPI, MongoDB, SQL basics · <b>Also:</b> Socket.IO, Supabase, Docker, JWT, Cloudinary — plus DSA daily. Also fluent in C, C++, Java; MySQL, Bootstrap, Git, HTML/CSS." },
+      a: "<b>Frontend:</b> React, TypeScript, Tailwind, Vite/Next.js · <b>Backend:</b> Node, Express, FastAPI, MongoDB, SQL basics · <b>Also:</b> Socket.IO, Supabase, Docker, JWT, Cloudinary — plus DSA. Also fluent in C, C++, Java; MySQL, Bootstrap, Git, HTML/CSS." },
     { k: ['project', 'work', 'built', 'portfolio', 'showcase'],
       a: "6 shipped: <b>HirBee</b> placement tracker (live), <b>Slack clone</b> (live), a route-optimisation engine, campus-access services, a result extractor and a quiz engine. Scroll to Projects — or ask me about any by name!" },
     { k: ['hirbee', 'placement', 'tracker', 'tpo', 'recruitment', 'hiring'],
@@ -198,9 +198,10 @@ if (!window.__termStarted) (function () {
   window.__termStarted = true;
   var lines = [
     ['p', '$ ./hire_akhilesh.sh'],
+    ['win', '\u2192 open_to_internships_and_jobs \u2588'],
     ['win', '\u2713 clean code ...... always'],
     ['p', '$ status --now'],
-    ['win', '\u2192 open_to_internships \u2588']
+    ['win', '\u2192 JPMC_SWE_Intern \u2588']
   ];
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
     body.innerHTML = lines.map(function (l) { return '<div><span class="' + l[0] + '">' + l[1] + '</span></div>'; }).join('');

@@ -1,10 +1,14 @@
 @echo off
-title My Portfolio - http://localhost:5173
+title My Portfolio - Local Server
 echo ============================================
-echo  Serving your portfolio at:
-echo  http://localhost:5173
+echo  Starting your portfolio from this folder...
+echo  Your browser will open automatically.
 echo  Keep this window open. Press Ctrl+C to stop.
 echo ============================================
 cd /d "%~dp0"
-python -m http.server 5173
+python "%~dp0start_site.py"
+if errorlevel 1 (
+    echo.
+    echo Could not start the portfolio server. Make sure Python is installed and available as "python".
+)
 pause

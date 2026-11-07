@@ -117,26 +117,26 @@
 
   // nav state + scroll progress + active section link
   var navEl = document.querySelector('.nav'),
-      progEl = document.querySelector('.progress');
+      progEl = document.querySelector('.progress'),
+      sectionIds = ['about', 'skills', 'work', 'cfg', 'experience'];
   function onScrollUI() {
     var y = window.scrollY || 0;
     navEl.classList.toggle('scrolled', y > 24);
     var h = document.documentElement.scrollHeight - innerHeight;
     progEl.style.transform = 'scaleX(' + (h > 0 ? y / h : 0) + ')';
+    var activeSection = '';
+    sectionIds.forEach(function (id) {
+      var section = document.getElementById(id);
+      if (section && section.getBoundingClientRect().top <= navEl.offsetHeight + 40) {
+        activeSection = id;
+      }
+    });
+    document.querySelectorAll('.links a').forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + activeSection);
+    });
   }
   addEventListener('scroll', onScrollUI, { passive: true }); onScrollUI();
-  var secIO = new IntersectionObserver(function (es) {
-    es.forEach(function (e) {
-      if (!e.isIntersecting) return;
-      var id = '#' + e.target.id;
-      document.querySelectorAll('.links a').forEach(function (a) {
-        a.classList.toggle('active', a.getAttribute('href') === id);
-      });
-    });
-  }, { rootMargin: '-40% 0px -55% 0px' });
-  ['about', 'skills', 'work', 'cfg'].forEach(function (id) {
-    var s = document.getElementById(id); if (s) secIO.observe(s);
-  });
+  addEventListener('resize', onScrollUI);
 
   // reveals + counters
   var io = new IntersectionObserver(function (es) {
@@ -179,7 +179,7 @@
 
   // vibe + need pickers
   var vibes = {
-    dsa: 'Now: <b>DSA daily</b> — patterns, custom data-structure builds, routing algorithms — while shipping full-stack features.',
+    dsa: 'Now: <b>DSA</b> — patterns, custom data-structure builds, routing algorithms — while shipping full-stack features.',
     mern: 'Now: <b>full-stack MERN</b> — realtime features, auth, dashboards and report pipelines, deployed on Vercel.',
     systems: 'Next: <b>system design basics</b> — schema design, API contracts, and thinking in scale.'
   };
@@ -253,9 +253,10 @@
   window.__termStarted = true;
   var lines = [
     ['p', '$ ./hire_akhilesh.sh'],
+    ['win', '\u2192 open_to_internships_and_jobs \u2588'],
     ['win', '\u2713 clean code ...... always'],
     ['p', '$ status --now'],
-    ['win', '\u2192 open_to_internships \u2588']
+    ['win', '\u2192 JPMC_SWE_Intern \u2588']
   ];
   var i;
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {

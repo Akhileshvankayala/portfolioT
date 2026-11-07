@@ -5,13 +5,11 @@ scroll parallax (GSAP ScrollTrigger), subtle 3D tilt on cards, marquees,
 vibe + contact pickers. No WebGL/3D model — fast and neat.
 
 ## Run locally
-No build step — static files:
-- `index.html` · `styles.css` · `main.js`
+No build step is required. Double-click `start-site.bat` to serve the current project folder on an available local port and open it in your browser. The local server disables caching so edits to scripts, styles, and images appear on reload.
 
 ```bash
 cd C:/Users/Akhi/Desktop/portfolio_redesign
-python -m http.server 5173
-# open http://localhost:5173
+python start_site.py
 ```
 
 ## Deploy (Vercel)
