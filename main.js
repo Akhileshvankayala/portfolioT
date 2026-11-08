@@ -256,7 +256,7 @@
     ['win', '\u2192 open_to_internships_and_jobs \u2588'],
     ['win', '\u2713 clean code ...... always'],
     ['p', '$ status --now'],
-    ['win', '\u2192 JPMC_SWE_Intern \u2588']
+    ['win', '\u2192 Upcoming_JPMC_SWE_Intern \u2588']
   ];
   var i;
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
