@@ -118,7 +118,7 @@
   // nav state + scroll progress + active section link
   var navEl = document.querySelector('.nav'),
       progEl = document.querySelector('.progress'),
-      sectionIds = ['about', 'skills', 'work', 'cfg', 'experience'];
+      sectionIds = ['about', 'skills', 'work', 'cfg', 'experience', 'certifications'];
   function onScrollUI() {
     var y = window.scrollY || 0;
     navEl.classList.toggle('scrolled', y > 24);
@@ -299,7 +299,7 @@
       if (!target) return;
       e.preventDefault();
       if (reduced) { target.scrollIntoView({ behavior: 'smooth' }); return; }
-      var wipeTitles = { top: ['00', 'HELLO'], about: ['01', 'ABOUT'], skills: ['02', 'SKILLS'], work: ['03', 'WORK'], cfg: ['04', 'CFG 2026'], contact: ['05', 'CONTACT'] };
+      var wipeTitles = { top: ['00', 'HELLO'], about: ['01', 'ABOUT'], skills: ['02', 'SKILLS'], work: ['03', 'WORK'], cfg: ['04', 'CFG 2026'], experience: ['05', 'EXPERIENCE'], certifications: ['06', 'CERTIFICATES'], contact: ['07', 'CONTACT'] };
       var wt = wipeTitles[target.id] || ['--', String(target.id).toUpperCase()];
       var wNum = document.getElementById('wipeNum'), wWord = document.getElementById('wipeWord');
       if (wNum) wNum.textContent = wt[0];

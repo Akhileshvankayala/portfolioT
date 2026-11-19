@@ -20,7 +20,7 @@
 <header class="nav">
   <a class="brand" href="#top">AV<span>©</span></a>
   <nav class="links">
-    <a href="#about">about</a><a href="#skills">skills</a><a href="#work">projects</a><a href="#cfg">CFG 2026</a><a href="#experience">experience</a>
+    <a href="#about">about</a><a href="#skills">skills</a><a href="#work">projects</a><a href="#cfg">CFG 2026</a><a href="#experience">experience</a><a href="#certifications">Certificates</a>
   </nav>
   <div class="nav-right"><span class="avail"><i></i>open to internships</span><a class="btn-pill" href="#contact">hire me</a></div>
 </header>
@@ -212,6 +212,23 @@
   </div>
 </section>
 
+<!-- CERTIFICATIONS -->
+<section id="certifications" class="certifications">
+  <p class="kicker mono reveal">Certifications — 06</p>
+  <h2 class="reveal">Learning, <em>proved.</em></h2>
+  <div class="cert-toolbar reveal">
+    <p>Browse certificates and skill badges. Tap any card to open the full-size original; PDFs can be zoomed on mobile.</p>
+    <label class="cert-search">
+      <span class="sr-only">Search certificates</span>
+      <input id="certSearch" type="search" placeholder="Search certificates…" autocomplete="off">
+      <span aria-hidden="true">⌕</span>
+    </label>
+  </div>
+  <p id="certCount" class="cert-count mono" aria-live="polite"></p>
+  <div id="certGrid" class="cert-grid" aria-label="Certificates"></div>
+  <p id="certEmpty" class="cert-empty" hidden>No certificates match that search.</p>
+</section>
+
 <!-- FOCUS -->
 <section class="stack">
   <p class="kicker mono reveal">Current focus — 06</p>
@@ -240,6 +257,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="./certificates.js"></script>
 <button id="botFab" class="bot-fab" aria-label="Chat with Akhilesh's portfolio bot" aria-expanded="false"><span class="bot-fab-dot"></span><span>Ask me</span></button>
 <div id="botPanel" class="bot-panel" role="dialog" aria-label="Portfolio assistant" aria-hidden="true">
   <div class="bot-head"><div class="bot-id"><span class="bot-ava">AV</span><div><b>Akhilesh's bot</b><span class="mono bot-status">Portfolio Q&amp;A · no sign-in</span></div></div><button id="botClose" aria-label="Close chat">✕</button></div>
