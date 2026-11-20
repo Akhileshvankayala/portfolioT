@@ -44,16 +44,19 @@
   }
 
   // project filters
-  var frow = document.getElementById('filterRow');
+  var frow = document.getElementById('filterRow'),
+      casesEl = document.querySelector('.cases');
   if (frow) frow.querySelectorAll('.fchip').forEach(function (btn) {
     btn.addEventListener('click', function () {
       frow.querySelectorAll('.fchip').forEach(function (x) { x.classList.remove('active'); });
       btn.classList.add('active');
       var f = btn.dataset.filter;
+      if (casesEl) casesEl.classList.toggle('is-filtered', f !== 'all');
       document.querySelectorAll('.case').forEach(function (c) {
         var show = f === 'all' || (c.dataset.tags || '').split(' ').indexOf(f) !== -1;
         c.classList.toggle('hide', !show);
       });
+      if (window.ScrollTrigger) requestAnimationFrame(function () { ScrollTrigger.refresh(); });
     });
   });
 
